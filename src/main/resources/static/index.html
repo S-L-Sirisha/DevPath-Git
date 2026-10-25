@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DevPath — A Programming Learning and Placement Preparation Portal. Learn. Diagnose. Improve. Get Hired.">
+  <title>DevPath — Programming Learning & Placement Portal</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/components.css">
+  
+  <!-- Chart.js for Placement Readiness Radar and Progress Charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <!-- Ambient background glow elements -->
+  <div class="ambient-glow-1"></div>
+  <div class="ambient-glow-2"></div>
+
+  <!-- Header & Navigation -->
+  <header class="app-header">
+    <div class="nav-container">
+      <div class="brand-logo" onclick="App.navigate('landing')">
+        <span class="brand-badge">DevPath</span>
+        <span style="font-size:0.85rem;color:var(--text-secondary);font-weight:500;display:none;margin-left:0.25rem;" class="brand-tagline-text">Placement Portal</span>
+      </div>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a class="nav-link" id="nav-dashboard" onclick="App.navigate('dashboard')">Dashboard</a></li>
+          <li><a class="nav-link" id="nav-radar" onclick="App.navigate('radar')">Radar</a></li>
+          <li><a class="nav-link" id="nav-mistakes" onclick="App.navigate('mistakes')">Mistakes</a></li>
+          <li><a class="nav-link" id="nav-paths" onclick="App.navigate('paths')">Learning Hub</a></li>
+          <li><a class="nav-link" id="nav-coding" onclick="App.navigate('coding')">Coding Arena</a></li>
+          <li><a class="nav-link" id="nav-assessments" onclick="App.navigate('assessments')">Assessments</a></li>
+          <li><a class="nav-link" id="nav-missions" onclick="App.navigate('missions')">Missions</a></li>
+          <li><a class="nav-link" id="nav-progress" onclick="App.navigate('progress')">Proof of Progress</a></li>
+          <li><a class="nav-link" id="nav-admin" onclick="App.navigate('admin')">Admin</a></li>
+          <li><a class="nav-link" id="nav-health" onclick="App.navigate('health')"><span style="width:7px;height:7px;border-radius:50%;background:#10b981;display:inline-block;"></span> DevOps Demo</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-auth" id="nav-auth-section">
+        <button class="btn btn-outline btn-sm" onclick="App.openLoginModal()">Login</button>
+        <button class="btn btn-primary btn-sm" onclick="App.openRegisterModal()">Get Started</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Application Body -->
+  <main class="main-wrapper">
+
+    <!-- 1. LANDING VIEW -->
+    <section id="landing-view" class="view-section active-view">
+      <div style="text-align:center;max-width:880px;margin:3rem auto 4rem auto;">
+        <div style="display:inline-flex;align-items:center;gap:0.5rem;background:#1e293b;padding:0.4rem 1rem;border-radius:9999px;font-size:0.85rem;border:1px solid #334155;margin-bottom:1.5rem;">
+          <span style="color:#10b981;">&#9679;</span> Built for College DevOps & Placement Laboratory Examination
+        </div>
+        <h1 style="font-size:3.25rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:1.25rem;line-height:1.15;">
+          Do not merely study code.<br>
+          <span style="background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Diagnose what holds you back.</span>
+        </h1>
+        <p style="font-size:1.2rem;color:var(--text-secondary);margin-bottom:2.5rem;line-height:1.6;">
+          <strong>DevPath</strong> identifies what you struggle with, explains <em>why</em> you struggle through automated diagnostic analysis, and guides you toward verifiable placement readiness.
+        </p>
+
+        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+          <button class="btn btn-primary btn-lg" onclick="App.quickDemoStudent()">Launch Student Demo</button>
+          <button class="btn btn-secondary btn-lg" onclick="App.quickDemoAdmin()">Launch Admin Portal</button>
+          <button class="btn btn-outline btn-lg" onclick="App.navigate('health')">Inspect DevOps System Status</button>
+        </div>
+      </div>
+
+      <!-- Core Differentiating Value Cards -->
+      <div class="grid-3" style="margin-bottom:4rem;">
+        <div class="card">
+          <div class="card-header">
+            <span class="badge badge-concept">Radar Analytics</span>
+            <span style="font-size:1.5rem;">&#128373;</span>
+          </div>
+          <h3 style="margin-bottom:0.75rem;">Placement Readiness Radar</h3>
+          <p style="color:var(--text-secondary);font-size:0.95rem;">
+            A real-time 5-axis visualization mapping Programming Fundamentals, DSA, Aptitude, Core CS, and Interview readiness derived from actual stored attempt data.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="badge badge-syntax">Diagnostic Engine</span>
+            <span style="font-size:1.5rem;">&#129504;</span>
+          </div>
+          <h3 style="margin-bottom:0.75rem;">Mistake-to-Mastery Tracker</h3>
+          <p style="color:var(--text-secondary);font-size:0.95rem;">
+            Classifies wrong answers into Concept Misunderstanding, Incorrect Logic, Boundary-Case Errors, or Type Traps with recommended revision topics.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="badge badge-easy">Verifiable Growth</span>
+            <span style="font-size:1.5rem;">&#128200;</span>
+          </div>
+          <h3 style="margin-bottom:0.75rem;">Proof of Progress</h3>
+          <p style="color:var(--text-secondary);font-size:0.95rem;">
+            Compare initial baseline assessments with recent performances to calculate exact percentage point deltas (e.g. 40% to 75% = +35 percentage points).
+          </p>
+        </div>
+      </div>
+
+      <!-- DevOps Syllabus Mapping Banner -->
+      <div class="card" style="background:linear-gradient(135deg,rgba(99,102,241,0.08),rgba(139,92,246,0.08));border-color:rgba(99,102,241,0.3);padding:2rem;">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;">
+          <div>
+            <span class="badge badge-medium" style="margin-bottom:0.5rem;">DevOps Laboratory Syllabus</span>
+            <h2 style="font-size:1.5rem;margin-bottom:0.5rem;">Complete CI/CD & Cloud Native Lifecycle</h2>
+            <p style="color:var(--text-secondary);max-width:700px;font-size:0.95rem;">
+              Demonstrates Git branch management, Maven multi-goal compilation, JUnit 5 automated testing, Jenkins 8-stage pipeline, Docker containerization, and Kubernetes deployments.
+            </p>
+          </div>
+          <button class="btn btn-primary" onclick="App.navigate('health')">View DevOps Demonstration Script</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. STUDENT DASHBOARD VIEW -->
+    <section id="dashboard-view" class="view-section">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;flex-wrap:wrap;gap:1rem;">
+        <div>
+          <h1 id="dash-greeting" style="font-size:2rem;margin-bottom:0.25rem;">Welcome back, Alex!</h1>
+          <p style="color:var(--text-secondary);font-size:0.95rem;" id="dash-sub">Target Role: <strong id="dash-role" style="color:var(--text-primary);">Full Stack Software Engineer</strong> | <span id="dash-college">Computer Science Department</span></p>
+        </div>
+        <div style="display:flex;gap:0.75rem;">
+          <button class="btn btn-outline btn-sm" onclick="App.navigate('radar')">View Full Radar</button>
+          <button class="btn btn-primary btn-sm" onclick="App.navigate('assessments')">Take Diagnostic Assessment</button>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Grid -->
+      <div class="grid-4" style="margin-bottom:2rem;">
+        <div class="stat-card">
+          <span class="stat-label">Overall Readiness</span>
+          <span class="stat-value" id="dash-readiness-val">65.0%</span>
+          <span class="stat-sub">Based on stored assessments</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Lessons Completed</span>
+          <span class="stat-value" id="dash-lessons-val">3</span>
+          <span class="stat-sub">Interactive topics mastered</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Challenges Solved</span>
+          <span class="stat-value" id="dash-challenges-val">2</span>
+          <span class="stat-sub">Algorithmic problems passed</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Skill Improvement</span>
+          <span class="stat-value" id="dash-progress-delta" style="color:#34d399;">+16.6%</span>
+          <span class="stat-sub">Percentage points delta</span>
+        </div>
+      </div>
+
+      <!-- Dashboard Main Row: Radar Card & Recommendations -->
+      <div class="grid-2" style="margin-bottom:2rem;">
+        <!-- Radar Widget -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Placement Readiness Radar</h3>
+              <p style="font-size:0.85rem;color:var(--text-secondary);">5-Axis Skill Breakdown</p>
+            </div>
+            <span id="dash-radar-badge" class="badge badge-easy">Live Data</span>
+          </div>
+          <div class="radar-box">
+            <canvas id="dashboardRadarCanvas"></canvas>
+          </div>
+          <div style="margin-top:1rem;display:flex;justify-content:space-between;padding-top:1rem;border-top:1px solid var(--border-subtle);font-size:0.9rem;">
+            <div>Strongest: <strong id="dash-strongest" style="color:#34d399;">Programming Fundamentals</strong></div>
+            <div>Focus Area: <strong id="dash-weakest" style="color:#fb7185;">CS Fundamentals</strong></div>
+          </div>
+        </div>
+
+        <!-- Adaptive Recommendations Widget -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Adaptive Recommendations</h3>
+              <p style="font-size:0.85rem;color:var(--text-secondary);">Personalized by Diagnostic Analysis</p>
+            </div>
+            <span class="badge badge-concept">Rule-Based Engine</span>
+          </div>
+          <div id="dash-recommendations-list" style="display:flex;flex-direction:column;gap:1rem;">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Attempts Table -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Recent Assessment History</h3>
+          <button class="btn btn-secondary btn-sm" onclick="App.navigate('assessments')">All Assessments</button>
+        </div>
+        <div style="overflow-x:auto;">
+          <table style="width:100%;border-collapse:collapse;font-size:0.95rem;text-align:left;">
+            <thead>
+              <tr style="border-bottom:1px solid var(--border-subtle);color:var(--text-secondary);font-size:0.85rem;">
+                <th style="padding:0.75rem 1rem;">Assessment Title</th>
+                <th style="padding:0.75rem 1rem;">Score</th>
+                <th style="padding:0.75rem 1rem;">Percentage</th>
+                <th style="padding:0.75rem 1rem;">Status</th>
+                <th style="padding:0.75rem 1rem;">Date</th>
+              </tr>
+            </thead>
+            <tbody id="dash-attempts-tbody">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. PLACEMENT READINESS RADAR FULL VIEW -->
+    <section id="radar-view" class="view-section">
+      <div style="margin-bottom:2rem;">
+        <h1 style="font-size:2rem;margin-bottom:0.25rem;">Placement Readiness Radar</h1>
+        <p style="color:var(--text-secondary);">Measurable 5-category evaluation computed from your stored assessment submissions.</p>
+      </div>
+
+      <div class="grid-2" style="margin-bottom:2rem;">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Skill Competency Chart</h3>
+            <span id="radar-full-status" class="badge badge-easy">Verified</span>
+          </div>
+          <div class="radar-box" style="height:400px;">
+            <canvas id="fullRadarCanvas"></canvas>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:1.5rem;">
+          <div class="card">
+            <h3 class="card-title" style="margin-bottom:1rem;">Competency Breakdown</h3>
+            <div id="radar-categories-bars" style="display:flex;flex-direction:column;gap:1rem;">
+              <!-- Dynamic Category Progress Bars -->
+            </div>
+          </div>
+
+          <div class="card" style="border-left:4px solid var(--primary);">
+            <h4 style="margin-bottom:0.5rem;">Diagnostic Insight & Next Step</h4>
+            <p id="radar-next-activity" style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:1rem;">
+              Evaluating assessment answers...
+            </p>
+            <div style="display:flex;gap:0.75rem;">
+              <button class="btn btn-primary btn-sm" onclick="App.navigate('mistakes')">Review Mistakes</button>
+              <button class="btn btn-secondary btn-sm" onclick="App.navigate('paths')">Explore Lessons</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. MISTAKE-TO-MASTERY VIEW -->
+    <section id="mistakes-view" class="view-section">
+      <div style="margin-bottom:2rem;">
+        <h1 style="font-size:2rem;margin-bottom:0.25rem;">Mistake-to-Mastery Tracker</h1>
+        <p style="color:var(--text-secondary);">
+          Do not hide mistakes. Analyze the root cause — Concept Misunderstanding, Incorrect Logic, Boundary-Case Errors, or Type Traps.
+        </p>
+      </div>
+
+      <!-- Filter Buttons -->
+      <div class="tab-nav" id="mistake-filter-nav">
+        <button class="tab-btn active" onclick="App.filterMistakes('ALL')">All Mistakes</button>
+        <button class="tab-btn" onclick="App.filterMistakes('CONCEPT_MISUNDERSTANDING')">Concept Misunderstanding</button>
+        <button class="tab-btn" onclick="App.filterMistakes('BOUNDARY_CASE_ERROR')">Boundary-Case Error</button>
+        <button class="tab-btn" onclick="App.filterMistakes('SYNTAX_OR_TYPE_TRAP')">Syntax / Type Trap</button>
+        <button class="tab-btn" onclick="App.filterMistakes('INCORRECT_LOGIC')">Incorrect Logic</button>
+      </div>
+
+      <div id="mistakes-list-container" style="display:flex;flex-direction:column;gap:1.5rem;">
+        <!-- Populated dynamically -->
+      </div>
+    </section>
+
+    <!-- 5. LEARNING PATHS (LEARNING HUB) VIEW -->
+    <section id="paths-view" class="view-section">
+      <div style="margin-bottom:2rem;">
+        <h1 style="font-size:2rem;margin-bottom:0.25rem;">Learning Hub</h1>
+        <p style="color:var(--text-secondary);">Structured curricula organized by programming language, topic, and difficulty with worked code examples.</p>
+      </div>
+
+      <div id="learning-paths-grid" class="grid-3">
+        <!-- Populated dynamically -->
+      </div>
+    </section>
+
+    <!-- 6. LESSON DETAIL VIEW -->
+    <section id="lesson-detail-view" class="view-section">
+      <div style="margin-bottom:1.5rem;">
+        <button class="btn btn-secondary btn-sm" onclick="App.navigate('paths')">&larr; Back to Learning Hub</button>
+      </div>
+
+      <div class="card" style="margin-bottom:2rem;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem;margin-bottom:1rem;">
+          <div>
+            <div style="display:flex;gap:0.5rem;align-items:center;margin-bottom:0.5rem;">
+              <span id="lesson-category-badge" class="badge badge-easy">Programming</span>
+              <span id="lesson-difficulty-badge" class="badge badge-medium">Intermediate</span>
+              <span id="lesson-time-badge" style="font-size:0.8rem;color:var(--text-muted);">15 min read</span>
+            </div>
+            <h1 id="lesson-title" style="font-size:2.2rem;line-height:1.2;">Lesson Title</h1>
+            <p id="lesson-topic" style="color:var(--primary);font-weight:600;margin-top:0.25rem;">Topic: Arrays</p>
+          </div>
+          <button id="lesson-complete-btn" class="btn btn-outline" onclick="App.toggleCurrentLesson()">
+            Mark as Completed
+          </button>
+        </div>
+
+        <div style="background:#1e293b;border-left:4px solid var(--primary);padding:1rem 1.25rem;border-radius:var(--radius-sm);margin:1.5rem 0;">
+          <strong>Summary:</strong> <span id="lesson-summary" style="color:var(--text-secondary);">...</span>
+        </div>
+
+        <div id="lesson-content-body" style="line-height:1.8;color:#cbd5e1;font-size:1.05rem;margin:2rem 0;">
+          <!-- Lesson Markdown/HTML loaded dynamically -->
+        </div>
+
+        <div class="grid-2" style="border-top:1px solid var(--border-subtle);padding-top:1.5rem;margin-top:2rem;">
+          <div>
+            <h4 style="margin-bottom:0.5rem;color:var(--text-secondary);">Prerequisites</h4>
+            <p id="lesson-prereqs" style="font-size:0.95rem;color:var(--text-muted);">-</p>
+          </div>
+          <div>
+            <h4 style="margin-bottom:0.5rem;color:var(--text-secondary);">Key Takeaways</h4>
+            <p id="lesson-takeaways" style="font-size:0.95rem;color:var(--text-muted);">-</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. CODING PRACTICE ARENA VIEW -->
+    <section id="coding-view" class="view-section">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;flex-wrap:wrap;gap:1rem;">
+        <div>
+          <h1 style="font-size:2rem;margin-bottom:0.25rem;">Coding Practice Arena</h1>
+          <p style="color:var(--text-secondary);">Placement-focused programming challenges with test case verification and complexity analysis.</p>
+        </div>
+      </div>
+
+      <div id="coding-challenges-grid" class="grid-2">
+        <!-- Challenges populated dynamically -->
+      </div>
+    </section>
+
+    <!-- 8. CODING CHALLENGE DETAIL VIEW -->
+    <section id="coding-detail-view" class="view-section">
+      <div style="margin-bottom:1.5rem;">
+        <button class="btn btn-secondary btn-sm" onclick="App.navigate('coding')">&larr; Back to Challenges</button>
+      </div>
+
+      <div class="grid-2" style="align-items:start;">
+        <!-- Left Pane: Problem Description -->
+        <div class="card">
+          <div style="display:flex;gap:0.5rem;align-items:center;margin-bottom:0.75rem;">
+            <span id="challenge-diff-badge" class="badge badge-easy">EASY</span>
+            <span id="challenge-topic-badge" class="badge badge-syntax">Topic</span>
+          </div>
+          <h2 id="challenge-title" style="margin-bottom:1rem;font-size:1.75rem;">Challenge Title</h2>
+          <div id="challenge-description" style="color:var(--text-secondary);line-height:1.7;margin-bottom:1.5rem;">
+            Problem description...
+          </div>
+
+          <h4 style="margin-bottom:0.5rem;">Example Input & Output</h4>
+          <div class="code-box">
+            <div><strong>Input:</strong> <span id="challenge-example-in">...</span></div>
+            <div><strong>Output:</strong> <span id="challenge-example-out">...</span></div>
+          </div>
+
+          <h4 style="margin-top:1.25rem;margin-bottom:0.5rem;">Constraints</h4>
+          <p id="challenge-constraints" style="color:var(--text-muted);font-family:var(--font-code);font-size:0.85rem;">-</p>
+
+          <div style="margin-top:1.5rem;background:#1e293b;border-radius:var(--radius-sm);padding:1rem;">
+            <h4 style="color:#fbbf24;margin-bottom:0.5rem;">Expected Approach & Complexity</h4>
+            <p id="challenge-approach" style="font-size:0.9rem;color:var(--text-secondary);margin-bottom:0.5rem;">...</p>
+            <div style="display:flex;gap:1.5rem;font-size:0.85rem;color:var(--text-muted);">
+              <span>Time: <strong id="challenge-time-comp" style="color:var(--text-primary);">O(n)</strong></span>
+              <span>Space: <strong id="challenge-space-comp" style="color:var(--text-primary);">O(1)</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Pane: Code Editor & Submission -->
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
+            <h3 class="card-title">Solution Editor</h3>
+            <select id="challenge-lang-select" class="form-control" style="width:auto;padding:0.35rem 0.75rem;font-size:0.85rem;" onchange="App.handleLanguageChange()">
+              <option value="java">Java</option>
+              <option value="javascript">JavaScript</option>
+            </select>
+          </div>
+
+          <textarea id="challenge-code-input" class="code-editor" spellcheck="false"></textarea>
+
+          <div style="display:flex;gap:0.75rem;margin-top:1rem;">
+            <button class="btn btn-secondary" onclick="App.runLocalCodeCheck()">Validate Solution</button>
+            <button class="btn btn-primary" onclick="App.submitChallengeSolution()">Submit Solution</button>
+          </div>
+
+          <div id="challenge-result-box" style="display:none;margin-top:1.25rem;padding:1rem;border-radius:var(--radius-sm);">
+            <!-- Submission feedback loaded here -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. ASSESSMENTS CATALOG VIEW -->
+    <section id="assessments-view" class="view-section">
+      <div style="margin-bottom:2rem;">
+        <h1 style="font-size:2rem;margin-bottom:0.25rem;">Placement Preparation Zone</h1>
+        <p style="color:var(--text-secondary);">Timed diagnostic mock assessments and category quizzes to evaluate your interview readiness.</p>
+      </div>
+
+      <div id="assessments-catalog-grid" class="grid-2">
+        <!-- Populated dynamically -->
+      </div>
+    </section>
+
+    <!-- 10. ASSESSMENT ARENA (TEST TAKING) VIEW -->
+    <section id="assessment-take-view" class="view-section">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
+        <div>
+          <h2 id="arena-title" style="font-size:1.5rem;">Assessment Title</h2>
+          <span id="arena-question-tracker" style="color:var(--text-secondary);font-size:0.9rem;">Question 1 of 6</span>
+        </div>
+        <div class="timer-pill">
+          <span>&#9201;</span>
+          <span id="arena-timer-display">15:00</span>
+        </div>
+      </div>
+
+      <div class="grid-3" style="align-items:start;">
+        <!-- Question & Options (2 columns wide) -->
+        <div class="card" style="grid-column:span 2;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+            <span id="arena-q-category" class="badge badge-concept">Category</span>
+            <button id="arena-flag-btn" class="btn btn-secondary btn-sm" onclick="App.toggleFlagCurrentQuestion()">
+              &#9873; Flag for Review
+            </button>
+          </div>
+
+          <h3 id="arena-q-text" style="font-size:1.2rem;line-height:1.5;margin-bottom:1rem;">
+            Question text...
+          </h3>
+
+          <div id="arena-q-code-container" style="display:none;">
+            <pre class="code-box"><code id="arena-q-code"></code></pre>
+          </div>
+
+          <div class="option-group" id="arena-options-container">
+            <!-- Populated dynamically -->
+          </div>
+
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2rem;border-top:1px solid var(--border-subtle);padding-top:1.25rem;">
+            <button id="arena-prev-btn" class="btn btn-secondary" onclick="App.prevQuestion()">Previous</button>
+            <button id="arena-next-btn" class="btn btn-primary" onclick="App.nextQuestion()">Next</button>
+          </div>
+        </div>
+
+        <!-- Question Palette / Navigation (1 column wide) -->
+        <div class="card">
+          <h4 style="margin-bottom:1rem;">Question Palette</h4>
+          <div id="arena-palette-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.5rem;margin-bottom:1.5rem;">
+            <!-- Palette numbers -->
+          </div>
+          <button class="btn btn-success" style="width:100%;" onclick="App.confirmSubmitAssessment()">
+            Submit Assessment
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. ASSESSMENT RESULT & EXPLANATIONS VIEW -->
+    <section id="assessment-result-view" class="view-section">
+      <div style="margin-bottom:2rem;">
+        <button class="btn btn-secondary btn-sm" onclick="App.navigate('dashboard')">&larr; Back to Dashboard</button>
+      </div>
+
+      <div class="card" style="text-align:center;padding:2.5rem;margin-bottom:2rem;">
+        <span id="res-pass-badge" class="badge badge-easy" style="font-size:0.9rem;padding:0.4rem 1rem;margin-bottom:1rem;">PASSED</span>
+        <h1 id="res-score-title" style="font-size:3rem;font-weight:800;margin-bottom:0.5rem;">5 / 6</h1>
+        <p id="res-score-pct" style="font-size:1.25rem;color:var(--text-secondary);margin-bottom:1.5rem;">83.3% Accuracy</p>
+        <p id="res-summary-message" style="max-width:600px;margin:0 auto;color:var(--text-muted);font-size:0.95rem;">
+          Your diagnostic breakdown has been recorded. Review your mistakes below to turn weak areas into mastery.
+        </p>
+      </div>
+
+      <!-- Category Breakdown -->
+      <div class="card" style="margin-bottom:2rem;">
+        <h3 class="card-title" style="margin-bottom:1rem;">Assessment Category Performance</h3>
+        <div id="res-category-breakdown" style="display:flex;flex-direction:column;gap:1rem;">
+          <!-- Dynamic bars -->
+        </div>
+      </div>
+
+      <!-- Detailed Review of Incorrect Questions -->
+      <div class="card">
+        <h3 class="card-title" style="margin-bottom:1rem;">Question Analysis & Explanations</h3>
+        <div id="res-questions-review-list" style="display:flex;flex-direction:column;gap:1.5rem;">
+          <!-- Mistake cards -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. PLACEMENT MISSIONS VIEW -->
+    <section id="missions-view" class="view-section">
+      <div style="margin-bottom:2rem;">
+        <h1 style="font-size:2rem;margin-bottom:0.25rem;">Placement Mission Mode</h1>
+        <p style="color:var(--text-secondary);">Structured multi-day sprint roadmaps. Complete tasks, achieve milestones, and resume anytime.</p>
+      </div>
+
+      <div id="missions-container" style="display:flex;flex-direction:column;gap:2rem;">
+        <!-- Missions loaded dynamically -->
+      </div>
+    </section>
+
+    <!-- 13. PROOF OF PROGRESS VIEW -->
+    <section id="progress-view" class="view-section">
+      <div style="margin-bottom:2rem;">
+        <h1 style="font-size:2rem;margin-bottom:0.25rem;">Proof of Progress</h1>
+        <p style="color:var(--text-secondary);">Auditable comparison between your initial diagnostic baseline and your latest technical assessment results.</p>
+      </div>
+
+      <!-- Delta Highlight Hero -->
+      <div class="card" style="background:linear-gradient(135deg,rgba(16,185,129,0.08),rgba(99,102,241,0.08));border-color:rgba(16,185,129,0.3);padding:2rem;margin-bottom:2rem;">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;">
+          <div>
+            <span class="badge badge-easy" style="margin-bottom:0.5rem;">Auditable Metric</span>
+            <h2 style="font-size:1.75rem;margin-bottom:0.5rem;">Baseline vs Current Proficiency</h2>
+            <p style="color:var(--text-secondary);font-size:0.95rem;">
+              Initial Assessment: <strong id="proof-initial-pct">40.0%</strong> &rarr; Latest Assessment: <strong id="proof-current-pct">75.0%</strong>
+            </p>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:0.25rem;">Measured Improvement</div>
+            <span id="proof-delta-badge" class="progress-delta-badge">+35.0%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Strengths and Weaknesses shift -->
+      <div class="grid-2" style="margin-bottom:2rem;">
+        <div class="card" style="border-top:4px solid var(--accent-rose);">
+          <h3 class="card-title" style="margin-bottom:0.75rem;color:#fb7185;">Initial Identified Weak Areas</h3>
+          <ul id="proof-initial-weak-list" style="padding-left:1.25rem;color:var(--text-secondary);line-height:1.8;">
+            <!-- Initial weak areas -->
+          </ul>
+        </div>
+        <div class="card" style="border-top:4px solid var(--accent-emerald);">
+          <h3 class="card-title" style="margin-bottom:0.75rem;color:#34d399;">Converted Strengths & Mastery</h3>
+          <ul id="proof-current-strong-list" style="padding-left:1.25rem;color:var(--text-secondary);line-height:1.8;">
+            <!-- Current strengths -->
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14. ADMIN DASHBOARD & MANAGEMENT VIEW -->
+    <section id="admin-view" class="view-section">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;flex-wrap:wrap;gap:1rem;">
+        <div>
+          <h1 style="font-size:2rem;margin-bottom:0.25rem;">Administrator Portal</h1>
+          <p style="color:var(--text-secondary);">Manage platform curricula, questions bank, missions, and student analytics.</p>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="App.openCreateLessonModal()">+ Add New Lesson</button>
+      </div>
+
+      <!-- Admin Platform Stats -->
+      <div class="grid-4" style="margin-bottom:2rem;">
+        <div class="stat-card">
+          <span class="stat-label">Total Registered Students</span>
+          <span class="stat-value" id="adm-students-val">0</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Active Lessons</span>
+          <span class="stat-value" id="adm-lessons-val">0</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Question Bank Size</span>
+          <span class="stat-value" id="adm-questions-val">0</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Assessments Completed</span>
+          <span class="stat-value" id="adm-attempts-val">0</span>
+        </div>
+      </div>
+
+      <!-- Admin Tabs: Lessons, Questions, Student Progress -->
+      <div class="tab-nav">
+        <button class="tab-btn active" onclick="App.switchAdminTab('lessons')">Lessons Management</button>
+        <button class="tab-btn" onclick="App.switchAdminTab('questions')">Questions Bank</button>
+        <button class="tab-btn" onclick="App.switchAdminTab('students')">Student Attempts</button>
+      </div>
+
+      <div id="adm-tab-lessons" class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+          <h3 class="card-title">All Curricular Lessons</h3>
+        </div>
+        <div style="overflow-x:auto;">
+          <table style="width:100%;border-collapse:collapse;font-size:0.95rem;text-align:left;">
+            <thead>
+              <tr style="border-bottom:1px solid var(--border-subtle);color:var(--text-secondary);">
+                <th style="padding:0.75rem 1rem;">ID</th>
+                <th style="padding:0.75rem 1rem;">Title</th>
+                <th style="padding:0.75rem 1rem;">Topic</th>
+                <th style="padding:0.75rem 1rem;">Category</th>
+                <th style="padding:0.75rem 1rem;">Difficulty</th>
+                <th style="padding:0.75rem 1rem;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adm-lessons-tbody">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="adm-tab-questions" class="card" style="display:none;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+          <h3 class="card-title">Assessment Question Bank</h3>
+          <button class="btn btn-primary btn-sm" onclick="App.openCreateQuestionModal()">+ Add MCQ Question</button>
+        </div>
+        <div id="adm-questions-list" style="display:flex;flex-direction:column;gap:1rem;">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <div id="adm-tab-students" class="card" style="display:none;">
+        <h3 class="card-title" style="margin-bottom:1rem;">Recent Student Assessment Attempts</h3>
+        <div style="overflow-x:auto;">
+          <table style="width:100%;border-collapse:collapse;font-size:0.95rem;text-align:left;">
+            <thead>
+              <tr style="border-bottom:1px solid var(--border-subtle);color:var(--text-secondary);">
+                <th style="padding:0.75rem 1rem;">Attempt ID</th>
+                <th style="padding:0.75rem 1rem;">Student</th>
+                <th style="padding:0.75rem 1rem;">Score</th>
+                <th style="padding:0.75rem 1rem;">Percentage</th>
+                <th style="padding:0.75rem 1rem;">Status</th>
+                <th style="padding:0.75rem 1rem;">Duration</th>
+              </tr>
+            </thead>
+            <tbody id="adm-students-tbody">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15. APPLICATION HEALTH & DEVOPS DEMO VIEW -->
+    <section id="health-view" class="view-section">
+      <div style="margin-bottom:2rem;">
+        <span class="badge badge-medium" style="margin-bottom:0.5rem;">DevOps Laboratory Demonstration</span>
+        <h1 style="font-size:2rem;margin-bottom:0.25rem;">Application Health & Kubernetes Status</h1>
+        <p style="color:var(--text-secondary);">Live diagnostics endpoint backing Kubernetes liveness/readiness probes and teacher fault-injection demo.</p>
+      </div>
+
+      <div class="grid-3" style="margin-bottom:2rem;">
+        <div class="stat-card">
+          <span class="stat-label">Health Status</span>
+          <span class="stat-value" id="health-status-badge" style="color:#34d399;">UP</span>
+          <span class="stat-sub" id="health-status-sub">All sub-systems responsive</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Application Version</span>
+          <span class="stat-value" id="health-version-val">1.0.0</span>
+          <span class="stat-sub">Build Number: <strong id="health-build-val">1</strong></span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">JVM Memory (Allocated)</span>
+          <span class="stat-value" id="health-mem-val">-- MB</span>
+          <span class="stat-sub">Live Java 21 Garbage Collector</span>
+        </div>
+      </div>
+
+      <!-- DevOps Live Demonstration Control Panel -->
+      <div class="card" style="border:1px solid rgba(99,102,241,0.4);margin-bottom:2rem;">
+        <h3 class="card-title" style="margin-bottom:0.75rem;">Teacher Fault-Injection & Recovery Demonstration</h3>
+        <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:1.5rem;line-height:1.6;">
+          Use these controls to simulate an unhealthy service for your DevOps laboratory examiner. Clicking <strong>Simulate Unhealthy State</strong> causes the <code>/api/health</code> endpoint to immediately return <code>503 SERVICE UNAVAILABLE</code>. In Kubernetes, this triggers the liveness probe failure and automatic pod restart!
+        </p>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+          <button class="btn btn-danger" onclick="App.simulateFailure()">Simulate Unhealthy State (503)</button>
+          <button class="btn btn-success" onclick="App.simulateRecovery()">Restore Healthy State (200 UP)</button>
+          <button class="btn btn-secondary" onclick="App.refreshHealth()">Refresh Health Probe</button>
+        </div>
+      </div>
+
+      <!-- Raw Health JSON Output -->
+      <div class="card">
+        <h4 style="margin-bottom:0.5rem;">Raw JSON Payload (/api/health)</h4>
+        <pre class="code-box" id="health-raw-json">Loading health diagnostics...</pre>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="app-footer">
+    <div class="footer-content">
+      <div>
+        <strong>DevPath Portal</strong> — A Programming Learning and Placement Preparation Portal
+      </div>
+      <div>
+        Designed for College DevOps Laboratory Examination &bull; "Learn. Diagnose. Improve. Get Hired."
+      </div>
+      <div class="footer-badges">
+        <span class="tech-tag">Java 21</span>
+        <span class="tech-tag">Spring Boot 3.3.4</span>
+        <span class="tech-tag">Spring Security + JWT</span>
+        <span class="tech-tag">MySQL / H2</span>
+        <span class="tech-tag">Docker</span>
+        <span class="tech-tag">Jenkins CI/CD</span>
+        <span class="tech-tag">Kubernetes</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- AUTHENTICATION MODAL (LOGIN & REGISTER) -->
+  <div id="auth-modal" class="modal-backdrop">
+    <div class="modal-content">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+        <h2 id="auth-modal-title" style="font-size:1.5rem;">Sign In to DevPath</h2>
+        <button style="background:none;border:none;color:var(--text-muted);font-size:1.5rem;cursor:pointer;" onclick="App.closeAuthModal()">&times;</button>
+      </div>
+
+      <div class="tab-nav" style="margin-bottom:1.5rem;">
+        <button id="auth-tab-login" class="tab-btn active" onclick="App.switchAuthTab('login')">Sign In</button>
+        <button id="auth-tab-register" class="tab-btn" onclick="App.switchAuthTab('register')">Create Account</button>
+      </div>
+
+      <!-- Quick 1-Click Pre-fill Demo Buttons -->
+      <div style="background:#1e293b;padding:0.75rem 1rem;border-radius:var(--radius-sm);margin-bottom:1.25rem;">
+        <span style="font-size:0.8rem;color:var(--text-secondary);display:block;margin-bottom:0.5rem;font-weight:600;">1-Click Demo Credentials:</span>
+        <div style="display:flex;gap:0.5rem;">
+          <button class="btn btn-secondary btn-sm" type="button" onclick="App.prefillDemoStudent()">Student (Alex)</button>
+          <button class="btn btn-secondary btn-sm" type="button" onclick="App.prefillDemoAdmin()">Admin (Prof)</button>
+        </div>
+      </div>
+
+      <!-- Login Form -->
+      <form id="login-form" onsubmit="App.handleLogin(event)">
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" id="login-email" class="form-control" required placeholder="student@devpath.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" id="login-password" class="form-control" required placeholder="Student@123">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;margin-top:0.5rem;">Sign In</button>
+      </form>
+
+      <!-- Register Form -->
+      <form id="register-form" onsubmit="App.handleRegister(event)" style="display:none;">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" id="reg-name" class="form-control" required placeholder="Jane Doe">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" id="reg-email" class="form-control" required placeholder="jane@example.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" id="reg-password" class="form-control" required minlength="6" placeholder="Min 6 characters">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Target Role</label>
+          <input type="text" id="reg-role" class="form-control" placeholder="Full Stack Developer">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;margin-top:0.5rem;">Create Account</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- CREATE LESSON MODAL (ADMIN) -->
+  <div id="create-lesson-modal" class="modal-backdrop">
+    <div class="modal-content" style="max-width:640px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+        <h2 style="font-size:1.5rem;">Add Curricular Lesson</h2>
+        <button style="background:none;border:none;color:var(--text-muted);font-size:1.5rem;cursor:pointer;" onclick="App.closeCreateLessonModal()">&times;</button>
+      </div>
+      <form onsubmit="App.handleCreateLesson(event)">
+        <div class="form-group">
+          <label class="form-label">Lesson Title</label>
+          <input type="text" id="adm-l-title" class="form-control" required placeholder="e.g. Graph Traversals: BFS vs DFS">
+        </div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label class="form-label">Category</label>
+            <select id="adm-l-category" class="form-control">
+              <option value="PROGRAMMING_FUNDAMENTALS">Programming Fundamentals</option>
+              <option value="DATA_STRUCTURES_AND_ALGORITHMS" selected>Data Structures & Algorithms</option>
+              <option value="CS_FUNDAMENTALS">CS Fundamentals</option>
+              <option value="APTITUDE_AND_LOGICAL">Aptitude & Logical</option>
+              <option value="TECH_INTERVIEW_PREP">Technical Interview Prep</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Topic</label>
+            <input type="text" id="adm-l-topic" class="form-control" required placeholder="e.g. Graphs">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Summary</label>
+          <input type="text" id="adm-l-summary" class="form-control" required placeholder="Key concept overview">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Lesson Content (Markdown / HTML)</label>
+          <textarea id="adm-l-content" class="code-editor" style="height:180px;" required placeholder="Write lesson body here..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Save and Publish Lesson</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="/js/api.js"></script>
+  <script src="/js/state.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+server:
+  port: 0
+
+spring:
+  application:
+    name: devpath-portal-test
+  datasource:
+    url: jdbc:h2:mem:devpathtest;DB_CLOSE_DELAY=-1;MODE=MySQL;DATABASE_TO_LOWER=TRUE
+    driverClassName: org.h2.Driver
+    username: sa
+    password: ""
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+  flyway:
+    enabled: false
+
+devpath:
+  jwt:
+    secret: dGVzdC1zZWNyZXQta2V5LWZvci11bml0LXRlc3RpbmctZGV2cGF0aC0yMDI2
+    expiration-hours: 1
+  version: 1.0.0-TEST
+  build-number: 999
+  environment: test

@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  devpath-mysql:
+    image: mysql:8.0
+    container_name: devpath-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: devpath_db
+      MYSQL_USER: devpath_user
+      MYSQL_PASSWORD: devpath_secure_password
+      MYSQL_ROOT_PASSWORD: root_secure_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - devpath-mysql-data:/var/lib/mysql
+    networks:
+      - devpath-network
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u devpath_user -pdevpath_secure_password || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  devpath-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: devpath-app
+    restart: unless-stopped
+    ports:
+      - "8085:8085"
+    environment:
+      PORT: 8085
+      SPRING_PROFILES_ACTIVE: prod
+      DB_HOST: devpath-mysql
+      DB_PORT: 3306
+      DB_NAME: devpath_db
+      DB_USER: devpath_user
+      DB_PASSWORD: devpath_secure_password
+      JWT_SECRET: c2VjdXJlLWRldnBhdGgtc3R1ZGVudC1wbGFjZW1lbnQtcG9ydGFsLWtleS0yMDI2LWRldm9wcw==
+      JWT_EXPIRATION_HOURS: 24
+      APP_VERSION: 1.0.0
+      BUILD_NUMBER: 1
+      ENVIRONMENT: docker-compose-production
+    depends_on:
+      devpath-mysql:
+        condition: service_healthy
+    networks:
+      - devpath-network
+
+volumes:
+  devpath-mysql-data:
+    driver: local
+
+networks:
+  devpath-network:
+    driver: bridge
