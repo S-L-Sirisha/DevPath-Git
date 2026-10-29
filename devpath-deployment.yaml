@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: devpath-docker
+  name: devpath-docker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: devpath-docker
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: devpath-docker
+    spec:
+      containers:
+      - image: devpath-docker:latest
+        name: devpath-docker
+        resources: {}
+status: {}
